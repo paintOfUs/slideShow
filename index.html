@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="index.css">
+    <title>ASM4 ChangeImages</title>
+</head>
+
+<body>
+    <div id="container">
+        <!--  bức ảnh -->
+        <img src="1.png" alt="" id="img">
+        <!-- 4 nút button tròn -->
+        <button onclick="clicked(true,0);" class="btn btn-1 active-btn"></button>
+        <button onclick="clicked(true,1);" class="btn btn-2"></button>
+        <button onclick="clicked(true,2);" class="btn btn-3"></button>
+        <button onclick="clicked(true,3);" class="btn btn-4"></button>
+        <!-- 2 nút button pre và next -->
+        <button onclick="clicked(false,-1);" id="left"><i class="fa fa-arrow-circle-left"
+                style="font-size:24px"></i></button>
+        <button onclick="clicked(true,-1);" id="right"><i class="fa fa-arrow-circle-right"
+                style="font-size:24px"></i></button>
+    </div>
+    <script>
+
+
+        var index = 0;
+        //   mảng đường dẫn ảnh
+        var changeImages = ['1.png', '2.png', '3.jpg', '4.jpg'];
+        function clicked(isNext, position) {
+
+            document.getElementsByClassName('active-btn')[0].classList.remove('active-btn');
+            // check điều kiên position
+            if (position < 0) {
+                 
+                if (isNext) {
+                    // đúng thì thay đổi  giá trị của index 
+                    console.log((index + 1) % changeImages.length);
+                    index = (index + 1) % changeImages.length;
+                } else {
+                    //  sai thì thay đổi index
+                    console.log((index - 1 + changeImages.length) % changeImages.length);
+                    index = (index - 1 + changeImages.length) % changeImages.length;
+                }
+            } else {
+                index = position;
+            }
+            //   gọi đến button click và gán class active-btn
+            document.getElementsByClassName('btn')[index].classList.add('active-btn');
+            //   gọi đến thẻ img thay đổi đường dẫn theo giá trị index khi click
+            document.getElementById('img').src = changeImages[index];
+        }
+
+
+    </script>
+</body>
+
+</html>
